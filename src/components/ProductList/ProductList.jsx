@@ -1,24 +1,24 @@
 import React, { useState } from 'react'
 import products from '../../api/products.json'
-import BeforeCart from './CardButton/BeforeCart'
-import AfterCart from './CardButton/AfterCart'
+import BeforeCart from './CartButton/BeforeCart'
+import AfterCart from './CartButton/AfterCart'
 import {useSelector,useDispatch} from "react-redux"
 import './ProductList.css'
+import CartButtons from './CartButton'
+import Cart from '../../redux/cart'
 
 const ProductList = () => {
-  const {cartCount} = useSelector((state)=> state.cart)
+  const {cartList} = useSelector((state)=> state.cart)
  
-
+  console.log(cartList);
 
   return (
     <section className='container'>
-    {products.map((products,key)=>(
+    {products.map((product,key)=>(
         <div className='product-container' key={key}>
-        <img src={products.image} alt='' />
-        <h3>{products.title}</h3>
-        {cartCount>0? <AfterCart />: <BeforeCart/>}
-       
-        
+        <img src={product.image} alt='' />
+        <h3>{product.title}</h3>
+        <CartButtons product={product} />
         </div>
     ))}
     </section>
